@@ -16,4 +16,8 @@ BookStoreProject
 
 执行数据库迁移 python manage.py migrate
 
-服务器开启 python manage.py runserver
+服务器开启 python manage.py runserver 
+
+#创建后台超级管理员 python manage.py createsuperuser
+
+#创建新的APP python manage.py startapp library
