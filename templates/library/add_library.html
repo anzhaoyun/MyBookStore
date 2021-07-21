@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加图书馆</title>
+</head>
+<body>
+    <form action="/library/add_library/" method="post">
+        {% csrf_token %}
+        <p>图书馆名字</p>
+        <input type="text" name="library_name">
+        <br>
+        <p>地址</p>
+        <input type="text" name="address">
+        <br>
+        <p>邮箱</p>
+        <input type="text" name="e_mail">
+        <br>
+        <p>联系电话</p>
+        <input type="text" name="tel_number">
+        <br>
+        <p>图片</p>
+        <input type="file" name="img">
+        <br>
+        <input type="submit" value="添加">
+    </form>
+</body>
+</html>
