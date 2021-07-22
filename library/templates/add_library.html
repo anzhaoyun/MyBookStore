@@ -5,7 +5,7 @@
     <title>添加图书馆</title>
 </head>
 <body>
-    <form action="/library/add_library/" method="post">
+    <form action="/add_library/" method="post">
         {% csrf_token %}
         <p>图书馆名字</p>
         <input type="text" name="library_name">
