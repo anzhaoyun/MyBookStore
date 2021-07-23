@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api_doc/', include_docs_urls(title='API接口文档')),
     path('library/', include('library.urls')),
+    path('book/',include('book.urls'))
 ]

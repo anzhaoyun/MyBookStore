@@ -7,25 +7,40 @@ import django_filters
 
 def add_library(request):
     data = request.POST
-    serializer = LibrarySerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
+    try:
+        serializer = LibrarySerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+    except Exception as e:
+        return JsonResponse({'errors':f"{e}"},safe=False)
     return JsonResponse(data,safe=False)
 
 def get_library(request):
-    librarys = Library.objects.all()
-    library= LibrarySerializer(instance=librarys,many=True)
-    library_list = library.data
-    return JsonResponse(library_list,safe=False)
+    try:
+        librarys = Library.objects.all()
+        library= LibrarySerializer(instance=librarys,many=True)
+        library_list = library.data
+        return JsonResponse(library_list,safe=False)
+    except Exception as e:
+        return JsonResponse({'errors':f"{e}"},safe=False)
 
 def update_library(request):
-    library = Library.objects.get(id=request.POST['id'])
-    data = request.POST
-    serializer = LibrarySerializer(instance=library,data=data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
-    return JsonResponse(library)
+    try:
+        library = Library.objects.get(id=request.POST['id'])
+        data = {'name':request.POST['name'],'address':request.POST['address']}
+        serializer = LibrarySerializer(instance=library,data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        result = LibrarySerializer(instance=Library.objects.get(id=request.POST['id']))
+    except Exception as e:
+        return JsonResponse({'errors':f"{e}"},safe=False)
+    return JsonResponse(result.data,safe=False)
 
 def del_library(request):
-
-    pass
+    try:
+        library = Library.objects.get(id=request.POST['id'])
+        result = LibrarySerializer(instance=library).data
+        library.delete()
+    except Exception as e:
+        return JsonResponse({'errors':f"{e}"},safe=False)
+    return JsonResponse(result,safe=False)

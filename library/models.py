@@ -5,7 +5,7 @@ from django.contrib.auth.models import User,Group
 
 class Library(models.Model):
     id = models.AutoField(primary_key = True)
-    name = models.CharField(max_length = 48,help_text='图书馆名字')
+    name = models.CharField(unique=True,max_length = 48,help_text='图书馆名字')
     c_time = models.DateField(auto_now_add = True,blank=True,help_text='创建日期')
     u_time = models.DateField(auto_now = True,blank=True,help_text='更新日期')
     address = models.CharField(max_length=256,help_text='地址')
